@@ -9,7 +9,10 @@ const con = require('./connectDB.js');
             // }
         );
         const page = await browser.newPage();
-        const url = 'https://vieclam24h.vn/tim-kiem-viec-lam-nhanh/?gate=sv&hdn_tu_khoa=&hdn_nganh_nghe_cap1=&hdn_dia_diem=&trinh_do=&hdn_cap_bac=&hdn_hinh_thuc=1&key=ttv_nangcao';
+        // fulltime
+        // const url = 'https://vieclam24h.vn/tim-kiem-viec-lam-nhanh/?gate=sv&hdn_tu_khoa=&hdn_nganh_nghe_cap1=&hdn_dia_diem=&trinh_do=&hdn_cap_bac=&hdn_hinh_thuc=1&key=ttv_nangcao';
+        // partime
+        const url = 'https://vieclam24h.vn/tim-kiem-viec-lam-nhanh/?hdn_tu_khoa=&hdn_nganh_nghe_cap1=46&hdn_dia_diem=2&key=ttv_nangcao'
         await page.goto(url, {
             timeout: 0
         });
@@ -51,8 +54,8 @@ const con = require('./connectDB.js');
                 })
                 return data
             })
-            let sql = "INSERT INTO jobs (company, title, content, dateExpired, salary, address, contactName) VALUES (?, ?, ?, ?, ?, ?, ?) ";
-            con.query(sql, [data[0].company, data[0].title, data[0].content, data[0].dateExpired, data[0].salary, data[0].address, data[0].contactName], function (err) {
+            let sql = "INSERT INTO jobs (company, title, content, timeRequired, dateExpired, salary, address, contactName) VALUES (?, ?, ?, ?, ?, ?, ?, ?) ";
+            con.query(sql, [data[0].company, data[0].title, data[0].content, 'partime', data[0].dateExpired, data[0].salary, data[0].address, data[0].contactName], function (err) {
                 if (err) throw err;
                 console.log("inserted data to DB!");
             })
